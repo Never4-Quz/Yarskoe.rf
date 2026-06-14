@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>🗺️Ярское - Интерактивная карта села</title>
+    <link rel="stylesheet" href="style.css"/>
+    <!-- Yandex Maps v3 -->
+    <script src="https://api-maps.yandex.ru/v3/?apikey=74e3e9a1-2304-4e99-a9ca-0541f4cb503d&lang=ru_RU"></script>
+    <script type="module" src="script.js"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="site-wrapper">
+
+    <!-- ===== SITE HEADER ===== -->
+    <div class="site-header">
+        <div class="site-header-inner">
+
+            <div class="site-header-left">
+                <span class="site-tagline">Малая родина — там, где я провел свое детство</span>
+            </div>
+
+            <div class="site-header-center">
+                <img src="https://static.tildacdn.com/tild3833-3663-4138-b531-623939653462/_.png"
+                     alt="Ярское" class="site-logo">
+            </div>
+
+            <div class="site-header-right">
+                <a href="mailto:ivan.ivanov@gmail.com" class="site-email">el.verevkina@gmail.com</a>
+            </div>
+
+        </div>
+
+        <div class="site-nav-line">
+            <hr class="linewrapper" style="background-color:#000000; opacity:0.1;">
+        </div>
+
+        <nav class="site-nav">
+            <a href="#" class="site-nav-link active">Главная</a>
+            <a href="#" class="site-nav-link">История</a>
+            <a href="#" class="site-nav-link">Архитектура</a>
+            <a href="#" class="site-nav-link">События</a>
+            <a href="#" class="site-nav-link">Крестьянство</a>
+        </nav>
+    </div>
+
+
+    <div class="app">
+
+        <!-- MAIN -->
+        <main class="main-layout">
+
+            <!-- MAP -->
+            <section class="map-section">
+                <div class="section-header">
+                    <h2>Карта села</h2>
+                </div>
+                <div id="map"></div>
+            </section>
+
+
+            <!-- INFO -->
+            <section class="info-section">
+                <div class="section-header">
+                    <h2>Информация</h2>
+                </div>
+
+                <div class="info-content">
+
+                    <!-- INITIAL STATE -->
+                    <div id="infoInitial" class="info-initial">
+                        <div class="info-initial-icon">🏛️</div>
+                        <h2 class="info-initial-title">Информация о здании</h2>
+                        <p class="info-initial-desc">
+                            Кликните на любую метку на карте слева, чтобы просмотреть информацию о здании и его 3D‑модель
+                        </p>
+                    </div>
+
+                    <!-- GALLERY -->
+                    <div class="gallery" id="galleryBlock" style="display:none">
+                        <button id="prevImage" class="gallery-btn left">‹</button>
+                        <img id="buildingImage" src="" alt="Здание">
+                        <button id="nextImage" class="gallery-btn right">›</button>
+                    </div>
+
+                    <!-- INFO -->
+                    <div class="building-info" id="buildingInfoBlock" style="display:none">
+
+                        <h1 id="buildingTitle">Выберите здание</h1>
+
+                        <div class="meta">
+                            <div class="meta-row">
+                                <span>Год постройки</span>
+                                <strong id="buildingYear">—</strong>
+                            </div>
+                            <div class="meta-row">
+                                <span>Тип</span>
+                                <strong id="buildingType">—</strong>
+                            </div>
+                        </div>
+
+                        <div class="description">
+                            <h3>История</h3>
+                            <p id="buildingDescription">Нажмите на здание на карте</p>
+                        </div>
+
+                        <div class="extra">
+                            <h3>Дополнительная информация</h3>
+                            <ul id="buildingExtra"></ul>
+                        </div>
+
+                        <button id="showModelBtn" class="main-btn">Показать 3D модель</button>
+
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+
+        <!-- 3D VIEWER -->
+        <section id="viewerSection" class="viewer-section hidden">
+            <div class="section-header">
+                <h2>3D модель</h2>
+                <div class="viewer-actions">
+                    <button id="closeViewerBtn" class="icon-btn">✕</button>
+                </div>
+            </div>
+            <div id="viewerContainer"></div>
+        </section>
+
+    </div>
+
+
+    <!-- ===== SITE FOOTER ===== -->
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+
+            <div class="site-footer-cols">
+
+                <div class="site-footer-col">
+                    <div class="site-footer-col-title">Крестьянство</div>
+                    <a href="#">Письма из Сибири</a>
+                    <a href="#">Искусство</a>
+                    <a href="#">Народное зодчество Сибири</a>
+                    <a href="#">Теодор Шанин</a>
+                </div>
+
+                <div class="site-footer-col">
+                    <div class="site-footer-col-title">История</div>
+                    <a href="#">История села</a>
+                    <a href="#">Приезд А.П. Чехова</a>
+                    <a href="#">Введенская церковь</a>
+                    <a href="#">Школа</a>
+                    <a href="#">Фельдшерский пункт</a>
+                    <a href="#">Ярская волость</a>
+                    <a href="#">Перепись на 1901 год</a>
+                </div>
+
+                <div class="site-footer-col">
+                    <div class="site-footer-col-title">Архитектура</div>
+                    <a href="#">Анализ застройки села</a>
+                    <a href="#">Ценная историко-архитектурная застройка</a>
+                    <a href="#">Ценная советская застройка</a>
+                    <a href="#">Ценная современная застройка</a>
+                    <a href="#">Рядовая застройка</a>
+                    <a href="#">Нейтральная застройка</a>
+                    <a href="#">Дисгармоничная застройка</a>
+                    <a href="#">Утраченные дома</a>
+                </div>
+
+                <div class="site-footer-col">
+                    <div class="site-footer-col-title">События</div>
+                    <a href="#">Календарь событий</a>
+                    <a href="#">Летопись села</a>
+                    <a href="#">Интерактивная карта</a>
+                    <a href="#">Туристические маршруты</a>
+                </div>
+
+            </div>
+
+            <div class="site-footer-bottom">
+                © 2023–2026 Елена Веревкина. Все права защищены.
+            </div>
+
+        </div>
+    </footer>
+
+</div>
+
+</body>
+</html>
